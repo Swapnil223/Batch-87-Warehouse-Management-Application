@@ -1,0 +1,24 @@
+
+main_menu.c: (in function main)
+main_menu.c:50:9: Test expression for while not boolean, type int: 1
+  Test expression type is not boolean or int. (Use -predboolint to inhibit
+  warning)
+main_menu.c: (in function supplier_module)
+main_menu.c:111:9: Test expression for while not boolean, type int: 1
+main_menu.c: (in function stockist_module)
+main_menu.c:163:9: Test expression for while not boolean, type int: 1
+main_menu.c: (in function admin_module)
+main_menu.c:213:9: Test expression for while not boolean, type int: 1
+main_menu.c: (in function menu)
+main_menu.c:271:10: Test expression for while not boolean, type int: 1
+main_menu.c:303:10: Test expression for while not boolean, type int: 1
+main_menu.c:335:10: Test expression for while not boolean, type int: 1
+main_menu.c: (in function login)
+main_menu.c:388:8: Test expression for while not boolean, type int: 1
+main_menu.c:401:7: Test expression for if not boolean, type int:
+                      verify(1, id, pass)
+main_menu.c:409:7: Test expression for if not boolean, type int:
+                      verify(2, id, pass)
+main_menu.c: (in function create)
+main_menu.c:431:8: Test expression for while not boolean, type int: 1
+

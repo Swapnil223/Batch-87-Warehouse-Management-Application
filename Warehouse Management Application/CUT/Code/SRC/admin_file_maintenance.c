@@ -16,7 +16,7 @@
 
 #include<stdio.h>
 #include<string.h>
-#include"header.h"
+#include"../header/header.h"
 #include<stdlib.h>
 
 
@@ -700,7 +700,7 @@ int edit_supplier()
 		printf("\nSupplier id %d not found for editing\n",f);
 		return EXIT_FAILURE;
 	}
-	printf("\nOld name is - %s\nOld contact no is - %lld\n",ptr->name,ptr->contact_no,ptr->items_supplied[0],ptr->items_supplied[1],ptr->items_supplied[2]);
+	printf("\nOld name is - %s\nOld contact no is - %lld\n",ptr->name,ptr->contact_no);
 	char name[SIZE];
 	char contact_no[SIZE];
 	while(1)
@@ -1310,7 +1310,7 @@ int file_to_list_supplier()
 {
 	FILE *p;
 	tr t1;
-	if((p=fopen("Supplier","rb"))==NULL)
+	if((p=fopen("../data/Supplier","rb"))==NULL)
 	{
 		printf("\nSupplier File is not there to read from\n");
 		return EXIT_FAILURE;
@@ -1370,7 +1370,7 @@ int list_to_file_supplier()
 		return EXIT_FAILURE;
 	}
 	FILE *p1;
-	if((p1=fopen("Supplier","wb"))==NULL)
+	if((p1=fopen("../data/Supplier","wb"))==NULL)
 	{
 		printf("\nSupplier File is not there to read from\n");
 		return EXIT_FAILURE;
@@ -1411,7 +1411,7 @@ int file_to_list_stockist()
 {
 	FILE *p;
 	tr1 t1;
-	if((p=fopen("Stockist","rb"))==NULL)
+	if((p=fopen("../data/Stockist","rb"))==NULL)
 	{
 		printf("\nStockist File is not there to read from\n");
 		return EXIT_FAILURE;
@@ -1472,7 +1472,7 @@ int list_to_file_stockist()
 		return EXIT_FAILURE;
 	}
 	FILE *p1;
-	if((p1=fopen("Stockist","wb"))==NULL)
+	if((p1=fopen("../data/Stockist","wb"))==NULL)
 	{
 		printf("\nStockist File is not there to read from\n");
 		return EXIT_FAILURE;
@@ -1512,7 +1512,7 @@ int file_to_list_product()
 {
 	FILE *p;
 	tr2 t1;
-	if((p=fopen("Product","rb"))==NULL)
+	if((p=fopen("../data/Product","rb"))==NULL)
 	{
 		printf("\nProduct File is not there to read from\n");
 		return EXIT_FAILURE;
@@ -1572,7 +1572,7 @@ int list_to_file_product()
 		return EXIT_FAILURE;
 	}
 	FILE *p1;
-	if((p1=fopen("Product","wb"))==NULL)
+	if((p1=fopen("../data/Product","wb"))==NULL)
 	{
 		printf("\nProduct File is not there to read from\n");
 		return EXIT_FAILURE;
@@ -1611,7 +1611,7 @@ int file_to_list_transaction()
 {
 	FILE *p;
 	tr4 t1;
-	if((p=fopen("Transaction_file","rb"))==NULL)
+	if((p=fopen("../data/Transaction_file","rb"))==NULL)
 	{
 		printf("\nTransaction File is not there to read from\n");
 		return EXIT_FAILURE;
@@ -1668,7 +1668,7 @@ int list_to_file_transaction()
 		return EXIT_FAILURE;
 	}
 	FILE *p1;
-	if((p1=fopen("Transaction_file","wb"))==NULL)
+	if((p1=fopen("../data/Transaction_file","wb"))==NULL)
 	{
 		printf("\nTransaction File is not there to read from\n");
 		return EXIT_FAILURE;

@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<ctype.h>
-#include "header.h"
+#include "../header/header.h"
 
 int valid_name(char *str)
 {	

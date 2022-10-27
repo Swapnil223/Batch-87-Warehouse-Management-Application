@@ -15,7 +15,7 @@
 
 
 #include<stdio.h>
-#include"header.h"
+#include"../header/header.h"
 #include<stdlib.h>
 #include<string.h>
 

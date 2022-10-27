@@ -104,4 +104,28 @@ int valid_choice(char *num)
 	}
 	return 0;
 }
+int valid_password(char *pass)
+{
+	
+	if(strlen(pass)<4)
+	{
+		return 1;
+	}
+	int f1=0,f2=0;
+	for(int i=0;i<strlen(pass);i++)
+	{
+		if(pass[i]=='/')
+			return 1;
+		else if(isupper(pass[i]))
+			f1=1;
+		else if(isdigit(pass[i]))
+			f2=1;
+	}
+	if(f1==1 && f2==1)
+		return 0;
+	else
+		return 1;
+		
+}
+
 

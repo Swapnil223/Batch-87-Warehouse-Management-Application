@@ -128,6 +128,7 @@ int supplier_edit_details(int mid)
 	char name[SIZE];
 	char contact_no[SIZE];
 	char ch[SIZE];
+	char pass[SIZE];
 	int f;
 	while(1)
 	{
@@ -164,8 +165,18 @@ int supplier_edit_details(int mid)
 		}
 		else if(f==3)
 		{
-			printf("\nEnter new password-\n");
-			scanf("%s",ptr->password);
+			while(1)
+			{
+				printf("\nEnter new password(It should atleast have 4 characters, have an uppercase letter and a number and shouldn't contain /)-\n");
+				scanf("%s",pass);
+				if(valid_password(pass))
+				{
+					printf("Incorrect format\n");
+					continue;
+				}
+				break;
+			}
+			strcpy(ptr->password,pass);
 		}
 		else if(f==4)
 		{
@@ -177,6 +188,7 @@ int supplier_edit_details(int mid)
 			continue;
 		}
 	}
+	printf("Deatails edited successfully\n");
 	return EXIT_SUCCESS;
 }                                               //The edit function ends here.
 
@@ -410,7 +422,13 @@ int view_stock()
 int request_for_items(int id)
 {
 	char pid[SIZE];
-	view_product();
+	view_stock();
+	if(!start2)
+	{
+		printf("There are no available products\n");
+		system("read a");
+		return EXIT_FAILURE;
+	}
 	while(1)
 	{
 		printf("Enter product ID for which to place request\n");
@@ -459,6 +477,7 @@ int stockist_edit_details(int st_id)
 	char name[SIZE];
 	char contact_no[SIZE];
 	char ch[SIZE];
+	char pass[SIZE];
 	int f;
 	while(1)
 	{
@@ -495,8 +514,18 @@ int stockist_edit_details(int st_id)
 		}
 		else if(f==3)
 		{
-			printf("Enter new password\n");
-			scanf("%s",ptr1->password);
+			while(1)
+			{
+				printf("\nEnter new password(It should atleast have 4 characters, have an uppercase letter and a number and shouldn't contain /)-\n");
+				scanf("%s",pass);
+				if(valid_password(pass))
+				{
+					printf("Incorrect format\n");
+					continue;
+				}
+				break;
+			}
+			strcpy(ptr->password,pass);
 		}
 		else if(f==4)
 		{
@@ -507,6 +536,7 @@ int stockist_edit_details(int st_id)
 			printf("Invalid choice! Enter a number in range 1-4\n");
 		}
 	}
+	printf("Deatails edited successfully\n");
 	return EXIT_SUCCESS;
 }                                                 //The edit function ends here.
 	
@@ -518,6 +548,7 @@ int add_supplier()
 		return EXIT_FAILURE;
 	}
 	char name[SIZE];
+	char pass[SIZE];
 	while(1)
 	{
 		printf("Enter Supplier Name -");
@@ -527,8 +558,18 @@ int add_supplier()
 		break;
 	}
 	strcpy(new->name,name);
-	printf("Enter new password -");
-	scanf("%s",new->password);
+	while(1)
+	{
+		printf("\nEnter new password(It should atleast have 4 characters, have an uppercase letter and a number and shouldn't contain /)-\n");
+		scanf("%s",pass);
+		if(valid_password(pass))
+		{
+			printf("Incorrect format\n");
+			continue;
+		}
+		break;
+	}
+	strcpy(new->password,pass);
 	char contact_no[SIZE];
 	while(1)
 	{
@@ -556,7 +597,6 @@ int add_supplier()
 		new->next=ptr;
 	}
 	printf("Supplier ID is - %d\n",new->id);
-	system("read a");
 	return EXIT_SUCCESS;
 }
 
@@ -613,8 +653,7 @@ int del_supplier()
 		prev->next=ptr->next;
 		free(ptr);
 	}
-	printf("Supplier ID %d deleted successfully...\n",f);
-	system("read a");
+	printf("Supplier ID %d deleted successfully\n",f);
 	return EXIT_SUCCESS;
 }
 
@@ -661,7 +700,7 @@ int edit_supplier()
 		printf("\nSupplier id %d not found for editing\n",f);
 		return EXIT_FAILURE;
 	}
-	printf("\nOld name is - %s\nOld contact no is - %lld\nOld product ID's are - %d--%d--%d\n",ptr->name,ptr->contact_no,ptr->items_supplied[0],ptr->items_supplied[1],ptr->items_supplied[2]);
+	printf("\nOld name is - %s\nOld contact no is - %lld\n",ptr->name,ptr->contact_no,ptr->items_supplied[0],ptr->items_supplied[1],ptr->items_supplied[2]);
 	char name[SIZE];
 	char contact_no[SIZE];
 	while(1)
@@ -682,7 +721,7 @@ int edit_supplier()
 		break;
 	}
 	ptr->contact_no=atoll(contact_no);
-	printf("\nSupplier ID %d is edited successfully...\n",f);
+	printf("\nSupplier ID %d is edited successfully\n",f);
 	return EXIT_SUCCESS;
 }
 
@@ -750,6 +789,7 @@ int add_stockist()
 		return EXIT_FAILURE;
 	}
 	char name[SIZE];
+	char pass[SIZE];
 	char contact_no[SIZE];
 	while(1)
 	{
@@ -760,8 +800,18 @@ int add_stockist()
 		break;
 	}
 	strcpy(new1->name,name);
-	printf("\nEnter new password -\n");
-	scanf("%s",new1->password);
+	while(1)
+	{
+		printf("\nEnter new password(It should atleast have 4 characters, have an uppercase letter and a number and shouldn't contain /)-\n");
+		scanf("%s",pass);
+		if(valid_password(pass))
+		{
+			printf("Incorrect format\n");
+			continue;
+		}
+		break;
+	}
+	strcpy(new1->password,pass);
 	while(1)
 	{
 		printf("\nEnter stockist contact no.-\n");
@@ -788,7 +838,6 @@ int add_stockist()
 		new1->next=ptr1;
 	}
 	printf("\nStockist ID is - %d\n",new1->id);
-	system("read a");
 	return EXIT_SUCCESS;
 }
 
@@ -914,7 +963,7 @@ int del_stockist()
 		}
 		prev1->next=ptr1->next;
 		free(ptr1);
-		printf("\nStockist ID deleted successfuly...\n");
+		printf("\nStockist ID %d deleted successfuly\n",f);
 	}
 	return EXIT_SUCCESS;
 }
@@ -945,11 +994,11 @@ int edit_stockist()
 	char edit[SIZE];
 	while(1)
 	{
-	printf("\nEnter the stockist ID for editing -\n");
-	scanf("%s",edit);
-	if(valid_integer(edit))
-		continue;
-	break;
+		printf("\nEnter the stockist ID for editing -\n");
+		scanf("%s",edit);
+		if(valid_integer(edit))
+			continue;
+		break;
 	}
 	for(ptr1=start1;(ptr1)&& ptr1->id!=atoi(edit);prev1=ptr1,ptr1=ptr1->next);
 	if(!ptr1)
@@ -957,25 +1006,25 @@ int edit_stockist()
 		printf("\nStockist id %d not found for editing\n",atoi(edit));
 		return EXIT_FAILURE;
 	}
-	printf("\nOld name is - %s\nOld contact no is - %lld\nOld items order - \n",ptr1->name,ptr1->contact_no);
+	printf("\nOld name is - %s\nOld contact no is - %lld\n",ptr1->name,ptr1->contact_no);
 	char name[SIZE];
 	char contact_no[SIZE];
 	while(1)
 	{
-	printf("\nEnter new name-\n");
-	scanf("%s",name);
-	if(valid_name(name))
-		continue;
-	break;
+		printf("\nEnter new name-\n");
+		scanf("%s",name);
+		if(valid_name(name))
+			continue;
+		break;
 	}
 	strcpy(new1->name,name);
 	while(1)
 	{
-	printf("\nEnter new contact no.-\n");
-	scanf("%s",contact_no);
-	if(valid_contact_num(contact_no))
-		continue;
-	break;
+		printf("\nEnter new contact no.-\n");
+		scanf("%s",contact_no);
+		if(valid_contact_num(contact_no))
+			continue;
+		break;
 	}
 	new1->contact_no=atoll(contact_no);
 	return EXIT_SUCCESS;
@@ -1128,6 +1177,7 @@ int del_product()
 		prev2->next=ptr2->next;
 		free(ptr2);
 	}
+	printf("Product ID %d deleted successfully\n",f);
 	return EXIT_SUCCESS;
 
 }
@@ -1202,6 +1252,7 @@ int edit_product()
 	ptr2->quantity=atoi(quantity);
 	printf("\nEnter new unit price -\n");
 	scanf("%lf",&ptr2->unit_price);
+	printf("Product ID %d edited successfully\n",atoi(edit));
 	return EXIT_SUCCESS;
 
 }
@@ -1261,7 +1312,7 @@ int file_to_list_supplier()
 	tr t1;
 	if((p=fopen("Supplier","rb"))==NULL)
 	{
-		printf("\nFile is not there to read...\n");
+		printf("\nSupplier File is not there to read from\n");
 		return EXIT_FAILURE;
 	}
 	fread(&t1,sizeof(tr),1,p);
@@ -1315,16 +1366,16 @@ int list_to_file_supplier()
 	tr t2;
 	if(!start)
 	{
-		printf("\nList is empty...\n");
+		printf("\nSupplier List is empty...\n");
 		return EXIT_FAILURE;
 	}
 	FILE *p1;
 	if((p1=fopen("Supplier","wb"))==NULL)
 	{
-		printf("\nFile is not present...\n");
+		printf("\nSupplier File is not there to read from\n");
 		return EXIT_FAILURE;
 	}
-	for(ptr=start;(ptr);ptr=ptr->next)
+	for(ptr=start;(ptr);prev=ptr,ptr=ptr->next)
 	{
 		t2.id=ptr->id;
 		strcpy(t2.name,ptr->name);
@@ -1334,8 +1385,10 @@ int list_to_file_supplier()
 		t2.items_supplied[1]=ptr->items_supplied[1];
 		t2.items_supplied[2]=ptr->items_supplied[2];
 		fwrite(&t2,sizeof(tr),1,p1);
+//		free(prev);
 	}
 	fclose(p1);
+//	free(prev);
 	return EXIT_SUCCESS;
 }
 
@@ -1360,7 +1413,7 @@ int file_to_list_stockist()
 	tr1 t1;
 	if((p=fopen("Stockist","rb"))==NULL)
 	{
-		printf("\nFile is not there to read...\n");
+		printf("\nStockist File is not there to read from\n");
 		return EXIT_FAILURE;
 	}
 	fread(&t1,sizeof(tr1),1,p);
@@ -1415,16 +1468,16 @@ int list_to_file_stockist()
 	tr1 t2;
 	if(!start1)
 	{
-		printf("\nList is empty\n");
+		printf("\nStockist List is empty\n");
 		return EXIT_FAILURE;
 	}
 	FILE *p1;
 	if((p1=fopen("Stockist","wb"))==NULL)
 	{
-		printf("\nFile is not present\n");
+		printf("\nStockist File is not there to read from\n");
 		return EXIT_FAILURE;
 	}
-	for(ptr1=start1;(ptr1);ptr1=ptr1->next)
+	for(ptr1=start1;(ptr1);prev1=ptr1,ptr1=ptr1->next)
 	{
 		t2.id=ptr1->id;
 		strcpy(t2.name,ptr1->name);
@@ -1434,8 +1487,10 @@ int list_to_file_stockist()
 		t2.items_ordered[1]=ptr1->items_ordered[1];
 		t2.items_ordered[2]=ptr1->items_ordered[2];
 		fwrite(&t2,sizeof(tr1),1,p1);
+//		free(prev1);
 	}
 	fclose(p1);
+//	free(prev1);
 	return EXIT_SUCCESS;
 }
 
@@ -1459,7 +1514,7 @@ int file_to_list_product()
 	tr2 t1;
 	if((p=fopen("Product","rb"))==NULL)
 	{
-		printf("\nFile is not there to read...\n");
+		printf("\nProduct File is not there to read from\n");
 		return EXIT_FAILURE;
 	}
 	fread(&t1,sizeof(tr2),1,p);
@@ -1510,15 +1565,16 @@ int file_to_list_product()
 int list_to_file_product()
 {
 	tr2 t2;
+	prd *pr;
 	if(!start2)
 	{
-		printf("\nList is empty\n");
+		printf("\nProduct List is empty\n");
 		return EXIT_FAILURE;
 	}
 	FILE *p1;
 	if((p1=fopen("Product","wb"))==NULL)
 	{
-		printf("\nFile is not present...\n");
+		printf("\nProduct File is not there to read from\n");
 		return EXIT_FAILURE;
 	}
 	for(ptr2=start2;(ptr2);prev2=ptr2,ptr2=ptr2->next)
@@ -1530,8 +1586,10 @@ int list_to_file_product()
 		t2.unit_price=ptr2->unit_price;
 		t2.status_indicator=ptr2->status_indicator;
 		fwrite(&t2,sizeof(tr2),1,p1);
+//		free(prev2);
 	}
 	fclose(p1);
+//	free(prev2);
 	return EXIT_SUCCESS;
 }
 
@@ -1555,7 +1613,7 @@ int file_to_list_transaction()
 	tr4 t1;
 	if((p=fopen("Transaction_file","rb"))==NULL)
 	{
-		printf("\n File is not there to read form\n");
+		printf("\nTransaction File is not there to read from\n");
 		return EXIT_FAILURE;
 	}
 	fread(&t1,sizeof(tr4),1,p);
@@ -1606,16 +1664,16 @@ int list_to_file_transaction()
 	tr4 t2;
 	if(!start3)
 	{
-		printf("\n List is Empty \n");
+		printf("\nTransaction List is Empty \n");
 		return EXIT_FAILURE;
 	}
 	FILE *p1;
 	if((p1=fopen("Transaction_file","wb"))==NULL)
 	{
-		printf("\n File is not there to read form\n");
+		printf("\nTransaction File is not there to read from\n");
 		return EXIT_FAILURE;
 	}
-	for(ptr3=start3;(ptr3);ptr3=ptr3->next)
+	for(ptr3=start3;(ptr3);prev3=ptr3,ptr3=ptr3->next)
 	{
 		t2.stockist_id=ptr3->stockist_id;
 		t2.product_id=ptr3->product_id;
@@ -1623,8 +1681,10 @@ int list_to_file_transaction()
 		strcpy(t2.product_name,ptr3->product_name);
                 strcpy(t2.stockist_name,ptr3->stockist_name);
 		fwrite(&t2,sizeof(tr4),1,p1);
+//		free(prev3);
 	}
 	fclose(p1);
+//	free(prev3);
 	return EXIT_SUCCESS;
 }
 
@@ -1648,17 +1708,14 @@ int display_report()
 	if(!start3)
 	{
 		printf("Transaction file is empty\n");
-		system("read a");
 		return EXIT_FAILURE;
 	}
 	printf("Transactions file\n");
 	printf("PRODUCT ID     STOCKIST ID    PRODUCT NAME    STOCKIST NAME     PRODUCT QUANTITY\n");
 	for(ptr3=start3;(ptr3);ptr3=ptr3->next)
 	{
-//	printf("%s ordered %d times by %s\n",ptr3->product_name,ptr3->product_quantity,ptr3->stockist_name);
         printf("%d------------    %d-----------  %s--------------  %s-----------------   %d\n",ptr3->product_id, ptr3->stockist_id, ptr3->product_name, ptr3->stockist_name, ptr3->product_quantity);
 	}
-	system("read a");
 	return EXIT_SUCCESS;
 }
 
@@ -1680,6 +1737,11 @@ int display_report()
 
 int display_report_item()
 {
+	if(!start3 || !start2)
+	{
+		printf("Product/Transaction file is empty\n");
+		return EXIT_FAILURE;
+	}
 	int count;
 	for(ptr2=start2;(ptr2);ptr2=ptr2->next)
 	{
@@ -1696,7 +1758,6 @@ int display_report_item()
 			printf("%s is in high demand\n",ptr2->name);
 		}
 	}
-	system("read a");
 	return EXIT_SUCCESS;
 }
 
@@ -1717,6 +1778,11 @@ int display_report_item()
 
 int display_report_stockist()
 {
+	if(!ptr3)
+	{
+		printf("Transaction file s empty\n");
+		return EXIT_FAILURE;
+	}
 	int count;
 	for(ptr1=start1;(ptr1);ptr1=ptr1->next)
 	{
@@ -1733,7 +1799,6 @@ int display_report_stockist()
 			printf("%s (%d) has made frequent transactions\n",ptr1->name,ptr1->id);
 		}
 	}
-	system("read a");
 	return EXIT_SUCCESS;
 }
 
@@ -1755,6 +1820,7 @@ int verify(int k,int id,char *pass1)
 	{
 		for(ptr=start;(ptr);ptr=ptr->next)
 		{
+	//		printf("%s  %s",ptr->password,pass1);
 			if((!strcmp(ptr->password,pass1))&&(ptr->id==id))
 			{
 				return 1;
@@ -1765,8 +1831,7 @@ int verify(int k,int id,char *pass1)
 	{
 		for(ptr1=start1;(ptr1);ptr1=ptr1->next)
 		{
-	                printf("%d %s\n",ptr1->id,ptr1->password);
-			if((strcmp(ptr1->password,pass1)==0)&&(ptr1->id==id))
+			if((!strcmp(ptr1->password,pass1))&&(ptr1->id==id))
 			{
 				return 1;
 			}

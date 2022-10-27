@@ -49,11 +49,11 @@ int main()
 		printf("\n1) Login(Existing user) \n2) Create Account(Supplier/stockist) \n3) Admin login\n4) Exit\n");              
 		while(1)
 		{
-		printf("Enter your choice:-");
-		(void)scanf("%s",f);
-		if(valid_choice(f)==1)
-			continue;
-		break;
+			printf("Enter your choice:-");
+			(void)scanf("%s",f);
+			if(valid_choice(f)==1)
+				continue;
+			break;
 		}
 		ch=atoi(f);
 		switch(ch)
@@ -122,16 +122,18 @@ static int supplier_module(int id)
 			case 1:(void)supplier_add_product(id);
 			       return EXIT_SUCCESS;
 			case 2:(void)supplier_edit_details(id);
+                               (void)system("read a");
 			       break;	
 			case 3:(void)view_selected_products(id);
+			       (void)system("read a");
 			       break;
 			case 4:(void)check_status(id);
-			       system("read a");
+		               (void)system("read a");
 			       return EXIT_SUCCESS;
-			case 5:(void)system("clear");
-			       break;
+			case 5: break;
 			default:printf("\nInvalid Choice\n");
 		}
+		(void)system("clear");
 	}
 	return EXIT_FAILURE;
 }
@@ -180,9 +182,9 @@ static int stockist_module(int n)
 			case 3:(void)request_for_items();
 			       break;
 			case 4:(void)stockist_edit_details(n);
+                               (void)system("read a");
 			       break;
-			case 5:(void)system("clear");
-			       break;
+			case 5:break;
 			default:printf("\nInvalid Choice\n");
 		}
 		(void)system("clear");
@@ -231,10 +233,13 @@ int admin_module()
 			case 3:(void)menu(3);
 			       break;
 			case 4:(void)display_report();
+			       (void)system("read a");
 			       break;
 			case 5:(void)display_report_stockist();
+			       (void)system("read a");
 			       break;
 			case 6:(void)display_report_item();
+			       (void)system("read a");
 			       break;
 			case 7:(void)rol_check();
 			       (void)system("read a");
@@ -281,21 +286,24 @@ int menu(int c)
 				break;
 			}
 		        choice1=atoi(f);
-			(void)system("clear");
 			switch(choice1)
 			{
 				case 1:(void)add_supplier();
+			               (void)system("read a");
 				       break;
 				case 2:(void)del_supplier();
+				       (void)system("read a");
 				       break;
 				case 3:(void)edit_supplier();
+			               (void)system("read a");
 				       break;
 				case 4:(void)view_supplier();
+				       (void)system("read a");
 				       break;
-				case 5:(void)system("clear");
-				       break;
+				case 5:break;
 				default:printf("\nInvalid choice\n");
 			}
+			(void)system("clear");
 		}
 	}
 	else if(c==2)
@@ -313,21 +321,24 @@ int menu(int c)
 				break;
 			}
 		        choice1=atoi(f);
-			(void)system("clear");
 			switch(choice1)
 			{
 				case 1:(void)add_stockist();
+			               (void)system("read a");
 				       break;
 				case 2:(void)del_stockist();
+				       (void)system("read a");
 				       break;
 				case 3:(void)edit_stockist();
+			               (void)system("read a");
 				       break;
 				case 4:(void)view_stockist();
+				       (void)system("read a");
 				       break;
-		                case 5:(void)system("clear");
-				        break;
+		                case 5:break;
 				default:printf("\nInvalid Choice\n");
 			}
+			(void)system("clear");
 		}
 	}
 	else if(c==3)
@@ -345,21 +356,23 @@ int menu(int c)
 				break;
 			}
 		        choice1=atoi(f);
-			(void)system("clear");
 			switch(choice1)
 			{
 				case 1:(void)add_product();
 				       break;
 				case 2:(void)del_product();
+				       (void)system("read a");
 				       break;
 				case 3:(void)edit_product();
+			               (void)system("read a");
 				       break;
 				case 4:(void)view_product();
+				       (void)system("read a");
 				       break;
-				case 5:(void)system("clear");
-				       break;
+				case 5:break;
 				default:printf("\nInvalid Choice\n");
 			}
+			(void)system("clear");
 		}
 	}
 	else
@@ -386,8 +399,9 @@ int menu(int c)
 
 int login()
 {
-	char pass[5];
+	char pass[SIZE];
 	char f[SIZE];
+	printf("\n-------------------Login for suppliers and stockists---------------------------\n");
 	(void)system("clear");
 	while(1)
 	{
@@ -431,6 +445,7 @@ int create()
 {
 	char f[SIZE];
 	(void)system("clear");
+	printf("\n-------------Create new account for suppliers and stockists-------------------\n");
 	int c=0;
 	while(1)
 	{
@@ -444,10 +459,12 @@ int create()
 	if(c==1)
 	{
 		(void)add_stockist();
+                (void)system("read a");
 	}
 	if(c==2)
 	{
 	        (void)add_supplier();
+                (void)system("read a");
 	}
 	return EXIT_SUCCESS;
 }
